@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAMMARD GCS</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="topbar">
+    Team: <strong>SAMMARD</strong> |
+    Time: <span id="m-time">00:00</span> |
+    Packets: <span id="p-count">0</span>
+</div>
+
+    <main class="grid-container">
+        <section class="panel">
+            <h3>Status & Log</h3>
+            <div id="status-display">READY</div>
+            <div id="console" class="console"></div>
+        </section>
+
+        <section class="panel center-panel">
+    <div id="map"></div>
+    <div class="bottom-center">
+        <canvas id="altChart"></canvas>
+        <div id="three-container"></div>
+    </div>
+</section>
+
+        <section class="panel">
+
+    <h3>Sensors</h3>
+
+    <div id="sensor-readings">
+
+        Altitude:
+        <span id="val-alt">0</span> ft
+        <br>
+
+        Velocity:
+        <span id="val-vel">0</span> mph
+        <br>
+
+        Pressure:
+        <span id="val-pres">1013</span> Pa
+        <br>
+
+        Battery:
+        <span id="val-batt">100</span> %
+        <br>
+
+        GPS:
+        <span id="val-gps">0</span>°N ,
+        <span id="val-gps-lon">0</span>°E
+        <br>
+
+        Signal:
+        <span id="val-rssi">-45</span> dBm
+        <br>
+
+        Range:
+        <span id="val-range">0</span> ft
+
+    </div>
+
+    <div class="control-buttons">
+
+        <button id="launch-btn">
+            Launch
+        </button>
+
+        <button id="advanced-btn">
+            Advanced Sensors
+        </button>
+
+        <button id="stop-btn"
+                style="background:#c0392b;">
+            Stop Telemetry
+        </button>
+
+        <button id="download-btn">
+            Download CSV
+        </button>
+
+    </div>
+
+</section>
+        <div id="advanced-panel">
+
+    <div class="adv-header">
+        <h2>Advanced Sensors</h2>
+        <button id="close-advanced">
+            Close
+        </button>
+    </div>
+
+    <div class="adv-grid">
+
+        <div class="adv-card">
+            <h3>Accelerometer</h3>
+
+            X: <span id="acc-x">0</span><br>
+            Y: <span id="acc-y">0</span><br>
+            Z: <span id="acc-z">0</span>
+
+            <canvas id="accChart"></canvas>
+        </div>
+
+        <div class="adv-card">
+            <h3>Gyroscope</h3>
+
+            X: <span id="gyro-x">0</span><br>
+            Y: <span id="gyro-y">0</span><br>
+            Z: <span id="gyro-z">0</span>
+
+            <canvas id="gyroChart"></canvas>
+        </div>
+
+        <div class="adv-card">
+            <h3>Magnetometer</h3>
+
+            X: <span id="mag-x">0</span><br>
+            Y: <span id="mag-y">0</span><br>
+            Z: <span id="mag-z">0</span>
+
+            <canvas id="magChart"></canvas>
+        </div>
+
+        <div class="adv-card">
+            <h3>Orientation</h3>
+
+            Roll:
+            <span id="roll">0</span><br>
+
+            Pitch:
+            <span id="pitch">0</span><br>
+
+            Yaw:
+            <span id="yaw">0</span>
+
+            <canvas id="orientationChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
