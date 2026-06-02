@@ -40,78 +40,145 @@ chart = new Chart(ctx,
         },
         scales: {
             x: {
+                ticks: {
+                    color: '#ffffff' // White color for x-axis labels
+                },
                 grid: {
-                    color: '#636262' // Darker grid lines for visibility
+                    color: '#575555' // Darker grid lines
                 }
+                ,
+                title: {
+                    display: true,
+                    text: 'Time (s)',
+                    color: '#ffffff',}// White color for x-axis title
             },
             y: {
                 beginAtZero: true,
                 grid: {
-                    color: '#636262' // Darker grid lines for visibility
+                    color: '#575555' 
+                },
+                ticks: {
+                    color: '#ffffff' 
+                },
+                title: {
+                    display: true,
+                    text: 'Altitude (ft)',
+                    color: '#ffffff',}
+            }
+        },
+
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#ffffff' // changes the legend text color
                 }
             }
-        }
+        },
+    
         }
     });
 
-const accChart = new Chart(
-document.getElementById('accChart'),
-{
-    type:'line',
-    data:{
-        labels:[],
-        datasets:[
-        {label:'Acc_X',data:[]},
-        {label:'Acc_Y',data:[]},
-        {label:'Acc_Z',data:[]}
+// Acceleration Chart
+const accChart = new Chart(document.getElementById('accChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            { label: 'Acc_X', data: [], borderColor: '#ff0000', fill: false, tension: 0.4 },
+            { label: 'Acc_Y', data: [], borderColor: '#00ff00', fill: false, tension: 0.4 },
+            { label: 'Acc_Z', data: [], borderColor: '#0000ff', fill: false, tension: 0.4 }
         ]
     },
-    options:{animation:false}
+    options: {
+        animation: false,
+        elements: {
+            point: { radius: 0 }
+        },
+        scales: {
+            x: {
+                ticks: { color: '#ffffff' },
+                grid: { color: '#575555' },
+                title: { display: true, text: 'Time (s)', color: '#ffffff' }
+            },
+            y: {
+                beginAtZero: true,
+                grid: { color: '#575555' },
+                ticks: { color: '#ffffff' },
+                title: { display: true, text: 'Acceleration (ft/s²)', color: '#ffffff' }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: { color: '#ffffff' }
+            }
+        }
+    }
 });
 
-const gyroChart = new Chart(
-document.getElementById('gyroChart'),
-{
-    type:'line',
-    data:{
-        labels:[],
-        datasets:[
-        {label:'Gyro_X',data:[]},
-        {label:'Gyro_Y',data:[]},
-        {label:'Gyro_Z',data:[]}
+// Gyroscope Chart
+const gyroChart = new Chart(document.getElementById('gyroChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            { label: 'Gyro_X', data: [], borderColor: '#ff9f43', fill: false, tension: 0.4 },
+            { label: 'Gyro_Y', data: [], borderColor: '#feca57', fill: false, tension: 0.4 },
+            { label: 'Gyro_Z', data: [], borderColor: '#ff6b6b', fill: false, tension: 0.4 }
         ]
     },
-    options:{animation:false}
+    options: {
+        animation: false,
+        elements: { point: { radius: 0 } },
+        scales: {
+            x: { ticks: { color: '#ffffff' }, grid: { color: '#575555' }, title: { display: true, text: 'Time (s)', color: '#ffffff' } },
+            y: { ticks: { color: '#ffffff' }, grid: { color: '#575555' }, title: { display: true, text: 'Gyro (°/s)', color: '#ffffff' } }
+        },
+        plugins: { legend: { labels: { color: '#ffffff' } } }
+    }
 });
 
-const magChart = new Chart(
-document.getElementById('magChart'),
-{
-    type:'line',
-    data:{
-        labels:[],
-        datasets:[
-        {label:'Mag_X',data:[]},
-        {label:'Mag_Y',data:[]},
-        {label:'Mag_Z',data:[]}
+// Magnetometer Chart
+const magChart = new Chart(document.getElementById('magChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            { label: 'Mag_X', data: [], borderColor: '#54a0ff', fill: false, tension: 0.4 },
+            { label: 'Mag_Y', data: [], borderColor: '#5f27cd', fill: false, tension: 0.4 },
+            { label: 'Mag_Z', data: [], borderColor: '#1a1872', fill: false, tension: 0.4 }
         ]
     },
-    options:{animation:false}
+    options: {
+        animation: false,
+        elements: { point: { radius: 0 } },
+        scales: {
+            x: { ticks: { color: '#ffffff' }, grid: { color: '#575555' }, title: { display: true, text: 'Time (s)', color: '#ffffff' } },
+            y: { ticks: { color: '#ffffff' }, grid: { color: '#575555' }, title: { display: true, text: 'Mag (µT)', color: '#ffffff' } }
+        },
+        plugins: { legend: { labels: { color: '#ffffff' } } }
+    }
 });
 
-const orientChart = new Chart(
-document.getElementById('orientationChart'),
-{
-    type:'line',
-    data:{
-        labels:[],
-        datasets:[
-        {label:'Roll',data:[]},
-        {label:'Pitch',data:[]},
-        {label:'Yaw',data:[]}
+// Orientation Chart
+const orientChart = new Chart(document.getElementById('orientationChart'), {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+            { label: 'Roll', data: [], borderColor: '#1dd1a1', fill: false, tension: 0.4 },
+            { label: 'Pitch', data: [], borderColor: '#00d2d3', fill: false, tension: 0.4 },
+            { label: 'Yaw', data: [], borderColor: '#ff9ff3', fill: false, tension: 0.4 }
         ]
     },
-    options:{animation:false}
+    options: {
+        animation: false,
+        elements: { point: { radius: 0 } },
+        scales: {
+            x: { ticks: { color: '#ffffff' }, grid: { color: '#575555' }, title: { display: true, text: 'Time (s)', color: '#ffffff' } },
+            y: { ticks: { color: '#ffffff' }, grid: { color: '#575555' }, title: { display: true, text: 'Orientation (°)', color: '#ffffff' } }
+        },
+        plugins: { legend: { labels: { color: '#ffffff' } } }
+    }
 });
 
 // Setup 3D Rocket
@@ -245,7 +312,7 @@ document.getElementById('launch-btn').onclick = () =>
         //Update the battery level
         if (batt > 0) 
         {
-            batt -= 0.01;
+            batt -= 10;
         } 
         else 
         {
