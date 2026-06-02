@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,150 +6,187 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-   <div class="topbar">
-    Team: <strong>SAMMARD</strong> |
-    Time: <span id="m-time">00:00</span> |
-    Packets: <span id="p-count">0</span>
-</div>
+    <div class="topbar">
+        <span class="tab1"></span>
+        Team: <strong>SAMMARD</strong>
+        <span class="tab2"></span>
+        Packets: <span id="p-count">0</span>
+    </div>
 
     <main class="grid-container">
-        <section class="panel">
-            <h3>Status & Log</h3>
-            <div id="status-display">READY</div>
-            <div id="console" class="console"></div>
-        </section>
 
-        <section class="panel center-panel">
-    <div id="map"></div>
-    <div class="bottom-center">
+    <section class="panel"> 
+        <h3> 
+            <div class="status-container" style="display: flex; gap: 3px;"> </div>
+            <span class="tab3"></span> 
+            Status: <span id="status-display">Ready</span>
+        </h3> 
+        
+        <div class="time-container" style="display: flex; gap: 3px;">
+            <span class="tab1"></span> 
+            <span>Time:</span> 
+            <span id="m-time">00:00:00</span>
+        </div>
+
+        <div 
+            id="low-batt-warning" style="display:none; 
+            text-align: center; 
+            margin-top: 10px;">
+        </div>
+
+        <br>
+        <div id="console" class="console"></div>
+    </section>
+
+    <section class="panel center-panel">
+        <div id="map"></div>
+        <div class="bottom-center">
         <canvas id="altChart"></canvas>
         <div id="three-container"></div>
-    </div>
-</section>
+        </div>
+    </section>
 
-        <section class="panel">
+    <section class="panel">
+        <h3> <span class="tab3"></span>Telemetry</h3>
+        <div id="sensor-readings">
 
-    <h3>Sensors</h3>
+            <span class="tab4"></span> 
+            Altitude:
+            <span id="val-alt">0</span> ft
+            <br>
 
-    <div id="sensor-readings">
+            <span class="tab4"></span> 
+            Velocity:
+            <span id="val-vel">0</span> mph
+            <br>
 
-        Altitude:
-        <span id="val-alt">0</span> ft
-        <br>
+            <span class="tab4"></span> 
+            Pressure:
+            <span id="val-pres">1013</span> Pa
+            <br>
 
-        Velocity:
-        <span id="val-vel">0</span> mph
-        <br>
+            <span class="tab4"></span> 
+            Battery:
+            <span id="val-batt">100</span> %
+            <br>
 
-        Pressure:
-        <span id="val-pres">1013</span> Pa
-        <br>
+            <span class="tab4"></span> 
+            Voltage:
+            <span id="val-volt">0</span> V
+            <br>
+            
+            <span class="tab4"></span> 
+            GPS:
+            <span id="val-gps">0</span>°N,
+            <span id="val-gps-lon">0</span>°E
+            <br>
 
-        Battery:
-        <span id="val-batt">100</span> %
-        <br>
+            <span class="tab4"></span> 
+            Signal:
+            <span id="val-rssi">-45</span> dBm
+            <br>
 
-        GPS:
-        <span id="val-gps">0</span>°N ,
-        <span id="val-gps-lon">0</span>°E
-        <br>
+            <span class="tab4"></span> 
+            Range:
+            <span id="val-range">0</span> ft
 
-        Signal:
-        <span id="val-rssi">-45</span> dBm
-        <br>
+        </div>
 
-        Range:
-        <span id="val-range">0</span> ft
+        <div class="control-buttons">
 
-    </div>
+            <button id="launch-btn">
+                Launch
+            </button>
 
-    <div class="control-buttons">
+            <button id="advanced-btn">
+                Advanced Sensors
+            </button>
 
-        <button id="launch-btn">
-            Launch
-        </button>
+            <button id="stop-btn" class="btn-stop">
+                Stop Telemetry
+            </button>
 
-        <button id="advanced-btn">
-            Advanced Sensors
-        </button>
+            <button id="download-btn">
+                Download CSV
+            </button>
 
-        <button id="stop-btn"
-                style="background:#c0392b;">
-            Stop Telemetry
-        </button>
+        </div>
 
-        <button id="download-btn">
-            Download CSV
-        </button>
-
-    </div>
-
-</section>
+    </section>
         <div id="advanced-panel">
 
-    <div class="adv-header">
-        <h2>Advanced Sensors</h2>
-        <button id="close-advanced">
-            Close
-        </button>
-    </div>
+            <div class="adv-header">
+                <h2>Advanced Sensors</h2>
+                <button id="close-advanced">
+                    Close
+                </button>
+            </div>
 
-    <div class="adv-grid">
+            <div class="adv-grid">
 
-        <div class="adv-card">
-            <h3>Accelerometer</h3>
+                <div class="adv-card">
+                    <h3>Accelerometer</h3>
+                    <span class="tab3"></span> 
+                    X: <span id="acc-x">0</span> ft/s²<br>
+                    <span class="tab3"></span> 
+                    Y: <span id="acc-y">0</span> ft/s²<br>
+                    <span class="tab3"></span> 
+                    Z: <span id="acc-z">0</span> ft/s²
 
-            X: <span id="acc-x">0</span><br>
-            Y: <span id="acc-y">0</span><br>
-            Z: <span id="acc-z">0</span>
+                    <canvas id="accChart"></canvas>
+                </div>
 
-            <canvas id="accChart"></canvas>
+                <div class="adv-card">
+                    <h3>Gyroscope</h3>
+                    <span class="tab3"></span> 
+                    X: <span id="gyro-x">0</span> °/s<br>
+                    <span class="tab3"></span> 
+                    Y: <span id="gyro-y">0</span> °/s<br>
+                    <span class="tab3"></span> 
+                    Z: <span id="gyro-z">0</span> °/s
+
+                    <canvas id="gyroChart"></canvas>
+                </div>
+
+                <div class="adv-card">
+                    <h3>Magnetometer</h3>
+                    <span class="tab3"></span> 
+                    X: <span id="mag-x">0</span> µT<br>
+                    <span class="tab3"></span> 
+                    Y: <span id="mag-y">0</span> µT<br>
+                    <span class="tab3"></span>
+                    Z: <span id="mag-z">0</span> µT
+
+                    <canvas id="magChart"></canvas>
+                </div>
+
+                <div class="adv-card">
+                    <h3>Orientation</h3>
+                    <span class="tab3"></span> 
+                    Roll:
+                    <span id="roll">0</span>°<br>
+
+                    <span class="tab3"></span> 
+                    Pitch:
+                    <span id="pitch">0</span>°<br>
+
+                    <span class="tab3"></span>
+                    Yaw:
+                    <span id="yaw">0</span>°
+
+                    <canvas id="orientationChart"></canvas>
+                </div>
+
+            </div>
         </div>
-
-        <div class="adv-card">
-            <h3>Gyroscope</h3>
-
-            X: <span id="gyro-x">0</span><br>
-            Y: <span id="gyro-y">0</span><br>
-            Z: <span id="gyro-z">0</span>
-
-            <canvas id="gyroChart"></canvas>
-        </div>
-
-        <div class="adv-card">
-            <h3>Magnetometer</h3>
-
-            X: <span id="mag-x">0</span><br>
-            Y: <span id="mag-y">0</span><br>
-            Z: <span id="mag-z">0</span>
-
-            <canvas id="magChart"></canvas>
-        </div>
-
-        <div class="adv-card">
-            <h3>Orientation</h3>
-
-            Roll:
-            <span id="roll">0</span><br>
-
-            Pitch:
-            <span id="pitch">0</span><br>
-
-            Yaw:
-            <span id="yaw">0</span>
-
-            <canvas id="orientationChart"></canvas>
-        </div>
-
-    </div>
-
-</div>
     </main>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="app.js"></script>
+
 </body>
 </html>
